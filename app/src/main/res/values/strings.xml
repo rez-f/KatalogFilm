@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Katalog Film</string>
+    <string name="search">Cari</string>
+    <string name="insert_movie">Judul Film</string>
+    <string name="judul">Judul Film</string>
+    <string name="description">Deskripsi</string>
+    <string name="poster">poster</string>
+</resources>
