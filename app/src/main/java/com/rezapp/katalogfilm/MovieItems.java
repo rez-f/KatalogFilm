@@ -2,64 +2,57 @@ package com.rezapp.katalogfilm;
 
 import org.json.JSONObject;
 
-import java.text.DecimalFormat;
-
 public class MovieItems {
 
-    private int id;
     private String judul;
-    private String deskripsi;
+    private String sinopsis;
+    private String rating;
+    private String rilis;
+    private String popularitas;
     private String poster;
 
     public MovieItems(JSONObject object) {
-
         try {
-            int id = object.getInt("id");
-            String title = object.getString("original_title");
-            String overview = object.getString("overview");
+            String judul = object.getString("original_title");
+            String sinopsis = object.getString("overview");
+            String rating = object.getString("vote_average");
+            String rilis = object.getString("release_date");
+            String popularitas = object.getString("popularity");
             String poster = object.getString("poster_path");
 
-            this.id = id;
-            this.judul = title;
-            this.deskripsi = overview;
+            this.judul = judul;
+            this.sinopsis = sinopsis;
+            this.rating = rating;
+            this.rilis = rilis;
+            this.popularitas = popularitas;
             this.poster = poster;
 
         } catch (Exception e) {
-
             e.printStackTrace();
-
         }
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getJudul() {
         return judul;
     }
 
-    public String getDeskripsi() {
-        return deskripsi;
+    public String getSinopsis() {
+        return sinopsis;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public String getRilis() {
+        return rilis;
+    }
+
+    public String getPopularitas() {
+        return popularitas;
     }
 
     public String getPoster() {
         return poster;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setJudul(String name) {
-        this.judul = name;
-    }
-
-    public void setDeskripsi(String deskripsi) {
-        this.deskripsi = deskripsi;
-    }
-
-    public void setPoster(String poster) {
-        this.poster = poster;
     }
 }
