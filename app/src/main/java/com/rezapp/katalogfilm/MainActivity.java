@@ -3,6 +3,8 @@ package com.rezapp.katalogfilm;
 import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,23 +13,20 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
-import com.rezapp.katalogfilm.Adapter.MovieAdapter;
-
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import java.util.ArrayList;
+
+import com.rezapp.katalogfilm.Adapter.MovieAdapter;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<MovieItems>>  {
 
     @BindView(R.id.listView) ListView listView;
     @BindView(R.id.edit_movie) EditText edtMovie;
     @BindView(R.id.btn_movie) Button btnSearch;
+    @BindView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeLayout;
 
     MovieAdapter adapter;
-
-    private ArrayList<MovieItems> movies = new ArrayList<>();
 
     static final String EXTRAS_MOVIE = "EXTRAS_MOVIE";
 
@@ -44,12 +43,34 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Movie = edtMovie.getText().toString();
-                if (TextUtils.isEmpty(Movie)) return;
+                swipeLayout.setRefreshing(true);
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        swipeLayout.setRefreshing(false);
+                        String Movie = edtMovie.getText().toString();
+                        if (TextUtils.isEmpty(Movie)) return;
+                        Bundle bundle = new Bundle();
+                        bundle.putString(EXTRAS_MOVIE, Movie);
+                        getLoaderManager().restartLoader(0, bundle, MainActivity.this);
+                    }
+                    }, 2000);
+            }
+        });
 
-                Bundle bundle = new Bundle();
-                bundle.putString(EXTRAS_MOVIE, Movie);
-                getLoaderManager().restartLoader(0, bundle, MainActivity.this);
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        swipeLayout.setRefreshing(false);
+                        String Movie = edtMovie.getText().toString();
+                        if (TextUtils.isEmpty(Movie)) return;
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString(EXTRAS_MOVIE, Movie);
+                        getLoaderManager().restartLoader(0, bundle, MainActivity.this);
+                    }
+                }, 2000);
             }
         });
 
@@ -87,8 +108,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<ArrayList<MovieItems>> loader, ArrayList<MovieItems> data) {
-//        movies.clear();
-//        movies.addAll(data);
         adapter.setData(data);
     }
 
@@ -96,16 +115,4 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoaderReset(Loader<ArrayList<MovieItems>> loader) {
         adapter.clearData();
     }
-
-    View.OnClickListener btnListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            String Movie = edtMovie.getText().toString();
-            if (TextUtils.isEmpty(Movie)) return;
-
-            Bundle bundle = new Bundle();
-            bundle.putString(EXTRAS_MOVIE, Movie);
-            getLoaderManager().restartLoader(0, bundle, MainActivity.this);
-        }
-    };
 }

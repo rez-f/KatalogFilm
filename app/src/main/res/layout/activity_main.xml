@@ -31,5 +31,16 @@
             android:text="@string/search"
             android:width="@dimen/search_width"/>
     </LinearLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listView"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
