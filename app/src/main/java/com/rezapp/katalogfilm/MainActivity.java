@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         ButterKnife.bind(this);
 
         adapter = new MovieAdapter(this);
+        adapter.notifyDataSetChanged();
         listView.setAdapter(adapter);
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
