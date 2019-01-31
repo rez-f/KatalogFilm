@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.rezapp.katalogfilm.Adapter.MovieAdapter;
 
@@ -51,8 +50,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 Bundle bundle = new Bundle();
                 bundle.putString(EXTRAS_MOVIE, Movie);
                 getLoaderManager().restartLoader(0, bundle, MainActivity.this);
-
-                Toast.makeText(MainActivity.this, Movie, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -90,9 +87,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<ArrayList<MovieItems>> loader, ArrayList<MovieItems> data) {
-        movies.clear();
-        movies.addAll(data);
-        adapter.setData(movies);
+//        movies.clear();
+//        movies.addAll(data);
+        adapter.setData(data);
     }
 
     @Override

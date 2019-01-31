@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
+import com.rezapp.katalogfilm.BuildConfig;
 import com.rezapp.katalogfilm.R;
 import com.rezapp.katalogfilm.MovieItems;
 
@@ -25,6 +26,7 @@ public class MovieAdapter extends BaseAdapter  {
     public void setData(ArrayList<MovieItems> items) {
         mData.clear();
         mData.addAll(items);
+        notifyDataSetChanged();
     }
 
     public void clearData() {
@@ -54,7 +56,7 @@ public class MovieAdapter extends BaseAdapter  {
         }
         holder.textViewJudul.setText(mData.get(position).getJudul());
         holder.textViewDeskripsi.setText(mData.get(position).getSinopsis());
-        String url_poster = "https://image.tmdb.org/t/p/w92/"+mData.get(position).getPoster();
+        String url_poster = BuildConfig.THUMBNAIL_URL+mData.get(position).getPoster();
         Glide.with(itemView).load(url_poster).into(holder.imgPoster);
         return itemView;
     }
