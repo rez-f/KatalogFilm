@@ -11,17 +11,22 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.rezapp.katalogfilm.Adapter.MovieAdapter;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<MovieItems>>  {
 
-    ListView listView;
+    @BindView(R.id.listView) ListView listView;
+    @BindView(R.id.edit_movie) EditText edtMovie;
+    @BindView(R.id.btn_movie) Button btnSearch;
+
     MovieAdapter adapter;
-    EditText edtMovie;
-    Button btnSearch;
 
     private ArrayList<MovieItems> movies = new ArrayList<>();
 
@@ -31,38 +36,40 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         adapter = new MovieAdapter(this);
-        listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
-        edtMovie = (EditText) findViewById(R.id.edit_movie);
-        btnSearch = (Button) findViewById(R.id.btn_movie);
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String Movie = edtMovie.getText().toString();
+                if (TextUtils.isEmpty(Movie)) return;
 
-        btnSearch.setOnClickListener(btnListener);
+                Bundle bundle = new Bundle();
+                bundle.putString(EXTRAS_MOVIE, Movie);
+                getLoaderManager().restartLoader(0, bundle, MainActivity.this);
+
+                Toast.makeText(MainActivity.this, Movie, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 MovieItems item = adapter.getItem(position);
+                Movie movie = new Movie();
 
-                String Judul = item.getJudul();
-                String Sinopsis = item.getSinopsis();
-                String Poster = "https://image.tmdb.org/t/p/w154/"+item.getPoster();
-                String Rating = item.getRating();
-                String Rilis = item.getRilis();
-                String Popularitas = item.getPopularitas();
+                movie.setJudul(item.getJudul());
+                movie.setSinopsis(item.getSinopsis());
+                movie.setPoster(BuildConfig.IMAGE_URL+item.getPoster());
+                movie.setRating(item.getRating());
+                movie.setRilis(item.getRilis());
+                movie.setPopularitas(item.getPopularitas());
 
-                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                Bundle b = new Bundle();
-
-                b.putString("judul", Judul);
-                b.putString("sinopsis", Sinopsis);
-                b.putString("poster", Poster);
-                b.putString("rating", Rating);
-                b.putString("rilis", Rilis);
-                b.putString("popularitas", Popularitas);
-
-                intent.putExtras(b);
-                startActivity(intent);
+                Intent moveWithObjectIntent = new Intent(MainActivity.this, DetailActivity.class);
+                moveWithObjectIntent.putExtra(DetailActivity.EXTRAS_MOVIE, movie);
+                startActivity(moveWithObjectIntent);
             }
         });
 

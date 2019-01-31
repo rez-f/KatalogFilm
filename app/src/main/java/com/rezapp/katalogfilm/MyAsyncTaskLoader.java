@@ -15,7 +15,7 @@ public class MyAsyncTaskLoader extends AsyncTaskLoader<ArrayList<MovieItems>>  {
     private boolean mHasResult = false;
     private String movies;
     private String url;
-    private static final String API_KEY = "4e133bdc1000bd42258c68e2c6ce2e4d";
+    private static final String API_KEY = BuildConfig.TMDB_API_KEY;
 
     MyAsyncTaskLoader(final Context context, String movies) {
         super(context);
@@ -53,9 +53,9 @@ public class MyAsyncTaskLoader extends AsyncTaskLoader<ArrayList<MovieItems>>  {
         SyncHttpClient client = new SyncHttpClient();
         final ArrayList<MovieItems> movieItemses = new ArrayList<>();
         if (TextUtils.isEmpty(movies)){
-            url = "https://api.themoviedb.org/3/movie/popular?api_key="+ API_KEY +"&language=en-US&page=1";
+            url = BuildConfig.BASE_URL + API_KEY +"&language=en-US&page=1";
         }else{
-            url = "https://api.themoviedb.org/3/search/movie?api_key="+ API_KEY +"&language=en-US&query="+ movies +"&page=1&include_adult=false";
+            url = BuildConfig.BASE_URL + API_KEY +"&language=en-US&query="+ movies +"&page=1&include_adult=false";
         }
 
         client.get(url, new AsyncHttpResponseHandler() {

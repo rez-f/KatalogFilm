@@ -9,11 +9,18 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField("String" , "TMDB_API_KEY" , '"4e133bdc1000bd42258c68e2c6ce2e4d"')
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "BASE_URL", '"https://api.themoviedb.org/3/movie/popular?api_key="'
+            buildConfigField "String", "IMAGE_URL", '"https://image.tmdb.org/t/p/w154/"'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", 'https://api.themoviedb.org/3/movie/popular?api_key='
+            buildConfigField "String", "IMAGE_URL", '"https://image.tmdb.org/t/p/w154/"'
         }
     }
 }
@@ -25,6 +32,8 @@ dependencies {
     implementation 'com.loopj.android:android-async-http:1.4.9'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

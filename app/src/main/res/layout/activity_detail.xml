@@ -19,62 +19,68 @@
             <ImageView
                 android:id="@+id/imagePoster"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:layout_marginStart="100dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="100dp"
-                android:layout_marginBottom="8dp" />
+                android:layout_height="@dimen/poster_height"
+                android:layout_marginStart="@dimen/start_end_margin"
+                android:layout_marginTop="@dimen/side_margin"
+                android:layout_marginEnd="@dimen/start_end_margin"
+                android:layout_marginBottom="@dimen/side_margin"
+                android:contentDescription="@string/empty" />
 
             <TextView
                 android:id="@+id/textJudul"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="TextView"
+                android:layout_marginStart="@dimen/side_margin"
+                android:layout_marginTop="@dimen/side_margin"
+                android:layout_marginEnd="@dimen/side_margin"
+                android:layout_marginBottom="@dimen/side_margin"
+                android:textSize="@dimen/textSize_detail"
+                android:text="@string/empty"
                 android:textColor="@color/colorPrimary" />
 
             <TextView
                 android:id="@+id/textRating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="TextView" />
+                android:layout_marginStart="@dimen/side_margin"
+                android:layout_marginTop="@dimen/side_margin"
+                android:layout_marginEnd="@dimen/side_margin"
+                android:layout_marginBottom="@dimen/side_margin"
+                android:textSize="@dimen/textSize_detail"
+                android:text="@string/empty" />
 
             <TextView
                 android:id="@+id/textPopularitas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="TextView" />
+                android:layout_marginStart="@dimen/side_margin"
+                android:layout_marginTop="@dimen/side_margin"
+                android:layout_marginEnd="@dimen/side_margin"
+                android:layout_marginBottom="@dimen/side_margin"
+                android:textSize="@dimen/textSize_detail"
+                android:text="@string/empty" />
 
             <TextView
                 android:id="@+id/textRilis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="TextView" />
+                android:layout_marginStart="@dimen/side_margin"
+                android:layout_marginTop="@dimen/side_margin"
+                android:layout_marginEnd="@dimen/side_margin"
+                android:layout_marginBottom="@dimen/side_margin"
+                android:textSize="@dimen/textSize_detail"
+                android:text="@string/empty" />
 
             <TextView
                 android:id="@+id/textSinopsis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="TextView" />
+                android:layout_marginStart="@dimen/side_margin"
+                android:layout_marginTop="@dimen/side_margin"
+                android:layout_marginEnd="@dimen/side_margin"
+                android:layout_marginBottom="@dimen/side_margin"
+                android:textSize="@dimen/textSize_detail"
+                android:text="@string/empty" />
         </LinearLayout>
     </ScrollView>
 

@@ -5,4 +5,5 @@
     <string name="judul">Judul Film</string>
     <string name="description">Deskripsi</string>
     <string name="poster">poster</string>
+    <string name="empty">Kosong</string>
 </resources>

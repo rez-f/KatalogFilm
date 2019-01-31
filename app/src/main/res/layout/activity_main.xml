@@ -20,7 +20,7 @@
 
         <EditText
             android:id="@+id/edit_movie"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/search_width"
             android:layout_height="wrap_content"
             android:hint="@string/insert_movie"
             android:layout_weight="1"/>
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search"
-            android:width="20dp"/>
+            android:width="@dimen/search_width"/>
     </LinearLayout>
 
     <ListView

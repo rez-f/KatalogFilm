@@ -6,35 +6,35 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DetailActivity extends AppCompatActivity {
 
-    TextView Judul;
-    TextView Sinopsis;
-    ImageView Poster;
-    TextView Rating;
-    TextView Rilis;
-    TextView Popularitas;
+    public static final String EXTRAS_MOVIE = "extra_movie";
+
+    @BindView(R.id.textJudul) TextView Judul;
+    @BindView(R.id.textSinopsis) TextView Sinopsis;
+    @BindView(R.id.imagePoster) ImageView Poster;
+    @BindView(R.id.textRating) TextView Rating;
+    @BindView(R.id.textRilis) TextView Rilis;
+    @BindView(R.id.textPopularitas) TextView Popularitas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        ButterKnife.bind(this);
 
-        Judul = (TextView) findViewById(R.id.textJudul);
-        Sinopsis = (TextView) findViewById(R.id.textSinopsis);
-        Poster = (ImageView) findViewById(R.id.imagePoster);
-        Rating = (TextView) findViewById(R.id.textRating);
-        Rilis = (TextView) findViewById(R.id.textRilis);
-        Popularitas = (TextView) findViewById(R.id.textPopularitas);
+        Movie movie = getIntent().getParcelableExtra(EXTRAS_MOVIE);
 
-        Bundle bundle = getIntent().getExtras();
-        if(bundle != null) {
-            Judul.setText(bundle.getString("judul"));
-            Sinopsis.setText("Sinopsis: \n \n"+bundle.getString("sinopsis"));
-            Glide.with(Poster).load(bundle.getString("poster")).into(Poster);
-            Rating.setText("Rating: "+bundle.getString("rating"));
-            Rilis.setText("Rilis: "+bundle.getString("rilis"));
-            Popularitas.setText("Popularitas: "+bundle.getString("popularitas"));
+        if(movie != null) {
+            Judul.setText(movie.getJudul());
+            Sinopsis.setText("Sinopsis: \n \n"+movie.getSinopsis());
+            Glide.with(Poster).load(movie.getPoster()).into(Poster);
+            Rating.setText("Rating: "+movie.getRating());
+            Rilis.setText("Rilis: "+movie.getRilis());
+            Popularitas.setText("Popularitas: "+movie.getPopularitas());
         }
     }
 }
