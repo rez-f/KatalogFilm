@@ -55,7 +55,7 @@ public class MyAsyncTaskLoader extends AsyncTaskLoader<ArrayList<MovieItems>>  {
         if (TextUtils.isEmpty(movies)){
             url = BuildConfig.BASE_URL + API_KEY +"&language=en-US&page=1";
         }else{
-            url = BuildConfig.BASE_URL + API_KEY +"&language=en-US&query="+ movies +"&page=1&include_adult=false";
+            url = BuildConfig.SEARCH_URL + API_KEY +"&language=en-US&query="+ movies +"&page=1&include_adult=false";
         }
 
         client.get(url, new AsyncHttpResponseHandler() {
